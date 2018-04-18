@@ -22,5 +22,9 @@ phases:
     build:
         commands:
             - echo "Building image"
-            - docker build -t ${IMAGE_REPO_NAME} -f Dockerfile-unit
-            - docker run --rm ${IMAGE_REPO_NAME}
+            - sbt docker:publishLocal
+    post_build:
+        commands:
+            - echo "Publishing to ECR"
+            - sbt -Daws_repo=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/ docker:publish
+            # - docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}

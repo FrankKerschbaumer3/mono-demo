@@ -1,4 +1,4 @@
-FROM bigtruedata/sbt AS hello-build
+FROM bigtruedata/sbt
 WORKDIR /app
 COPY . .
 CMD ["sbt", "test"]
