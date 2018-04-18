@@ -1,4 +1,0 @@
-FROM bigtruedata/sbt
-WORKDIR /app
-COPY . .
-CMD ["sbt", "test"]

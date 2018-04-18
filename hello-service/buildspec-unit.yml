@@ -22,5 +22,6 @@ phases:
     build:
         commands:
             - echo "Building image"
-            - docker build -t ${IMAGE_REPO_NAME} -f Dockerfile-unit
-            - docker run --rm ${IMAGE_REPO_NAME}
+            - sbt -Dtests_only docker:stage
+            - docker build -t hello-tests -f ./target/docker/stage/Dockerfile
+            - docker run --rm hello-tests
