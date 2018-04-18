@@ -19,5 +19,5 @@ phases:
             - cd ./hello-service
             - echo "Building image"
             - sbt -Dtests_only docker:stage
-            - docker build -t hello-tests -f ./target/docker/stage/Dockerfile
+            - docker build -t hello-tests -f ./target/docker/stage/Dockerfile .
             - docker run --rm hello-tests
