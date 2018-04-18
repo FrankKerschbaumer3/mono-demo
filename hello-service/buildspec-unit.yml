@@ -22,8 +22,4 @@ phases:
         commands:
             - echo "Building image"
             - docker build -t ${IMAGE_REPO_NAME} .
-            - docker tag $IMAGE_REPO_NAME:${IMAGE_TAG} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}
-    post_build:
-        commands:
-            - echo "Publishing to ECR"
-            - docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}
+            - docker run --rm ${IMAGE_REPO_NAME}
