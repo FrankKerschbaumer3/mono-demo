@@ -13,7 +13,7 @@ phases:
             - git log -1
             - printenv
             - whoami
-            - echo $CODEBUILD_BUILD_ID
+            - echo ${CODEBUILD_BUILD_ID}
     pre_build:
         commands:
             - echo "ECR login"
@@ -21,6 +21,7 @@ phases:
     build:
         commands:
             - echo "Building image"
+            # - cd ./${SERVICE_NAME}
             - docker build -t ${IMAGE_REPO_NAME} .
             - docker tag $IMAGE_REPO_NAME:${IMAGE_TAG} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}
     post_build:

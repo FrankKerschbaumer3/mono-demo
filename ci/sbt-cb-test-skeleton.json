@@ -1,0 +1,31 @@
+{
+  "name": "${BUILD_NAME}",
+  "source": {
+    "type": "GITHUB",
+    "location": "${GITHUB_REPO}",
+    "gitCloneDepth": 1,
+    "buildspec": "${BUILD_SPEC_FILE}",
+    "auth": {
+      "type": "OAUTH"
+    },
+    "insecureSsl": false
+  },
+  "artifacts": {
+    "type": "NO_ARTIFACTS"
+  },
+  "cache": {
+    "type": "NO_CACHE"
+  },
+  "environment": {
+    "type": "LINUX_CONTAINER",
+    "image": "bigtruedata/sbt:latest",
+    "computeType": "BUILD_GENERAL1_SMALL",
+    "privilegedMode": true
+  },
+  "serviceRole": "${AWS_SERVICE_ROLE}",
+  "timeoutInMinutes": 60,
+  "tags": [],
+  "badge": {
+    "badgeEnabled": true
+  }
+}
