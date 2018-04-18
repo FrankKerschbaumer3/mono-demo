@@ -6,7 +6,6 @@ import akka.http.scaladsl.server.Directives
 import akka.stream.ActorMaterializer
 
 import scala.concurrent.ExecutionContext
-import scala.io.StdIn
 
 object Main extends Directives {
   def main(args: Array[String]): Unit = {
