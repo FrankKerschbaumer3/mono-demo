@@ -5,27 +5,6 @@ scalaVersion := "2.12.4"
 assemblyJarName in assembly := "app.jar"
 mainClass in assembly := Some("mono.Main")
 
-// Docker Section
-import com.typesafe.sbt.packager.docker._
-enablePlugins(DockerPlugin)
-
-version in Docker := version.value
-
-dockerCommands := Seq() // To clear out the built in commands
-dockerCommands ++= Seq(
-	Cmd("FROM", "bigtruedata/sbt:latest AS build"),
-	Cmd("WORKDIR", "/app"),
-	Cmd("COPY", ". ."),
-	ExecCmd("CMD", "sbt", "assembly"),
-
-	Cmd("FROM", "openjdk:8-alpine"),
-	Cmd("WORKDIR", "/app"),
-	Cmd("COPY", "--from=build /app/target/scala-2.12/app.jar ."),
-	Cmd("EXPOSE", "8080"),
-	ExecCmd("ENTRYPOINT", "java -jar /app/app.jar")
-)
-
-
 // Akka
 val akkaVersion = "2.5.11"
 val akkaDeps = Seq(
