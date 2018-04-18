@@ -7,7 +7,7 @@ class HelloRouteTest extends FlatSpec with Matchers with ScalatestRouteTest with
 
   "Hello Route" should "return the Hello message" in {
     Get() ~> HelloRoute() ~> check {
-      responseAs[Hello] shouldBe Hello("Hello World!")
+      responseAs[Hello] shouldBe Hello("Hello Demo World!")
     }
   }
 

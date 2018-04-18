@@ -12,6 +12,6 @@ object HelloRoute extends Directives with HelloJsonSupport {
 
   def apply(): Route =
     get {
-      complete(Hello("Hello World!"))
+      complete(Hello("Hello Demo World!"))
     }
 }
