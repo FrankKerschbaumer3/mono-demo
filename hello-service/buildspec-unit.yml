@@ -10,14 +10,9 @@ version: 0.2
 phases:
     install:
         commands:
-            - echo "Installing Docker"
-            - curl -fsSL get.docker.com | sh
             - git log -1
             - printenv
     build:
         commands:
             - cd ./hello-service
-            - echo "Building image"
-            - sbt -Dtests_only docker:stage
-            - docker build -t hello-tests -f ./target/docker/stage/Dockerfile .
-            - docker run --rm hello-tests
+            - sbt test

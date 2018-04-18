@@ -15,22 +15,16 @@ dockerCommands := Seq() // To clear out the built in commands
 dockerCommands ++= Seq(
 	Cmd("FROM", "bigtruedata/sbt:latest AS build"),
 	Cmd("WORKDIR", "/app"),
-	Cmd("COPY", ". .")
+	Cmd("COPY", ". ."),
+	ExecCmd("CMD", "sbt", "assembly"),
+
+	Cmd("FROM", "openjdk:8-alpine"),
+	Cmd("WORKDIR", "/app"),
+	Cmd("COPY", "--from=build /app/target/scala-2.12/app.jar ."),
+	Cmd("EXPOSE", "8080"),
+	ExecCmd("ENTRYPOINT", "java -jar /app/app.jar")
 )
 
-// If test is not set - append the final build section
-if(sys.props.contains("tests_only")) {
-	dockerCommands += ExecCmd("CMD", "sbt", "test")
-} else {
-	dockerCommands ++= Seq(
-		ExecCmd("CMD", "sbt", "assembly"),
-		Cmd("FROM", "openjdk:8-alpine"),
-		Cmd("WORKDIR", "/app"),
-		Cmd("COPY", "--from=build /app/target/scala-2.12/app.jar ."),
-		Cmd("EXPOSE", "8080"),
-		ExecCmd("ENTRYPOINT", "java -jar /app/app.jar")
-	)
-}
 
 // Akka
 val akkaVersion = "2.5.11"
