@@ -13,18 +13,18 @@ phases:
             - git log -1
             - printenv
             - whoami
-            - echo $CODEBUILD_BUILD_ID
-            - cd ./hello-service
+            - echo ${CODEBUILD_BUILD_ID}
     pre_build:
         commands:
             - echo "ECR login"
-            - $(aws ecr get-login --no-include-email --region ${AWS_REGION})
+            - aws ecr get-login --no-include-email --region ${AWS_REGION}
     build:
         commands:
             - echo "Building image"
-            - sbt docker:publishLocal
+             - cd ./hello-service
+            - docker build -t ${IMAGE_REPO_NAME} .
+            - docker tag $IMAGE_REPO_NAME:${IMAGE_TAG} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}
     post_build:
         commands:
             - echo "Publishing to ECR"
-            - sbt -Daws_repo=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/ docker:publish
-            # - docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}
+            - docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}
