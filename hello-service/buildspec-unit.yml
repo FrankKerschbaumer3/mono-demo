@@ -14,6 +14,7 @@ phases:
             - printenv
             - whoami
             - echo $CODEBUILD_BUILD_ID
+            - cd ./hello-service
     pre_build:
         commands:
             - echo "ECR login"
