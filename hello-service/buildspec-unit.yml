@@ -15,10 +15,6 @@ phases:
             - whoami
             - echo $CODEBUILD_BUILD_ID
             - cd ./hello-service
-    pre_build:
-        commands:
-            - echo "ECR login"
-            - $(aws ecr get-login --no-include-email --region ${AWS_REGION})
     build:
         commands:
             - echo "Building image"
