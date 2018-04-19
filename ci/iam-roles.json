@@ -1,17 +1,26 @@
 {
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "CodeBuildAccess",
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "codebuild.amazonaws.com"
-      },
-      "Action": [
-        "ecr:GetDownloadUrlForLayer",
-        "ecr:BatchGetImage",
-        "ecr:BatchCheckLayerAvailability"
-      ]
-    }
-  ]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:logs:us-east-1:822471943354:log-group:/aws/codebuild/*",
+                "arn:aws:logs:us-east-1:822471943354:log-group:/aws/codebuild/"
+            ],
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+
+                /* S3 Access */
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:GetObjectVersion",
+
+                /* ECR Access */
+                "ecr:*",
+                "cloudtrail:LookupEvents"
+            ]
+        }
+    ]
 }
