@@ -1,0 +1,11 @@
+version: 0.2
+
+phases:
+    install:
+        commands:
+            - git log -1
+            - printenv
+    build:
+        commands:
+            - cd ./roller-service
+            - sbt test
