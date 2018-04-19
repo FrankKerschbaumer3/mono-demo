@@ -1,0 +1,24 @@
+{
+  "name": "js-service",
+  "version": "0.0.1",
+  "description": "",
+  "author": "Matthew Edge",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo 'Nope'",
+    "ci_jest_test": "npm run test",
+    "lint": "echo 'LINT NOPE'"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "eslint": "3.18.0",
+    "eslint-config-airbnb": "14.1.0",
+    "eslint-loader": "1.6.3",
+    "eslint-plugin-import": "2.2.0",
+    "socket.io": "1.7.3"
+  }
+}

@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+    install:
+        commands:
+          - git log -1
+          - printenv
+          - whoami
+          - echo ${CODEBUILD_BUILD_ID}
+          - node -v
+          - which node
+          - echo "NPM install"
+          - npm install
+    build:
+        commands:
+            - cd ./hello-service
+            - echo "Running tests"
+            - npm run test
+            - npm run ci_jest_test
+            - npm run lint
