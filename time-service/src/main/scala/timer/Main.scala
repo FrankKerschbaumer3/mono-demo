@@ -19,14 +19,6 @@ object Main extends Directives {
         TimeRoute()
       }
 
-    val bindingFuture = Http().bindAndHandle(routes, "0.0.0.0", 8080)
-
-    bindingFuture.onComplete(_ => println("Server online on port :8080"))
-
-    sys.addShutdownHook {
-      bindingFuture
-        .flatMap(_.unbind()) // trigger unbinding from the port
-        .onComplete(_ => system.terminate()) // and shutdown when done
-    }
+    Http().bindAndHandle(routes, "0.0.0.0", 8080)
   }
 }
