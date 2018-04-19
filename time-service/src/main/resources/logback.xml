@@ -43,7 +43,7 @@
     </sift>
 </appender>
 
-<root level="DEBUG">
+<root level="INFO">
     <appender-ref ref="STDOUT" /><!-- For local testing -->
     <!--<appender-ref ref="SIFTER" />-->
 </root>
