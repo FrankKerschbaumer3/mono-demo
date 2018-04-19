@@ -25,7 +25,5 @@
   "serviceRole": "${AWS_SERVICE_ROLE}",
   "timeoutInMinutes": 60,
   "tags": [],
-  "badge": {
-    "badgeEnabled": true
-  }
+  "badgeEnabled": true
 }
