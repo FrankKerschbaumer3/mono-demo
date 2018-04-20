@@ -4,7 +4,10 @@ phases:
     install:
         commands:
             - git log -1
+            - git branch
             - printenv
+            - whoami
+            - echo ${CODEBUILD_BUILD_ID}
     build:
         commands:
             - cd ./hello-service

@@ -1,7 +1,7 @@
 FROM bigtruedata/sbt:latest AS build
 WORKDIR /app
 COPY . .
-CMD ["sbt", "assembly"]
+RUN sbt assembly
 
 FROM openjdk:8-alpine
 WORKDIR /app

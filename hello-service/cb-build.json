@@ -1,0 +1,47 @@
+{
+    "name": "mono-hello-build-test",
+    "source": {
+        "type": "GITHUB",
+        "location": "https://github.com/MatthewEdge/mono-demo",
+        "gitCloneDepth": 1,
+        "buildspec": "hello-service/buildspec-build.yml",
+        "auth": {
+            "type": "OAUTH"
+        },
+        "insecureSsl": false
+    },
+    "artifacts": {
+        "type": "NO_ARTIFACTS"
+    },
+    "cache": {
+        "type": "NO_CACHE"
+    },
+    "environment": {
+        "type": "LINUX_CONTAINER",
+        "image": "aws/codebuild/docker:17.09.0",
+        "computeType": "BUILD_GENERAL1_SMALL",
+        "privilegedMode": true,
+        "environmentVariables": [
+            {
+                "name": "AWS_REGION",
+                "value": "us-east-1",
+                "type": "PLAINTEXT"
+            },
+            {
+                "name": "AWS_ACCOUNT_ID",
+                "value": "${AWS_ACCOUNT_ID}",
+                "type": "PLAINTEXT"
+            },
+            {
+                "name": "IMAGE_REPO_NAME",
+                "value": "hello-service",
+                "type": "PLAINTEXT"
+            }
+        ],
+        "privilegedMode": true
+    },
+    "serviceRole": "${SERVICE_ROLE}",
+    "timeoutInMinutes": 60,
+    "tags": [],
+    "badgeEnabled": true
+}

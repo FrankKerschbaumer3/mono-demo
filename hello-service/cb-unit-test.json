@@ -1,0 +1,29 @@
+{
+  "name": "mono-hello-unit-test",
+  "source": {
+    "type": "GITHUB",
+    "location": "https://github.com/MatthewEdge/mono-demo",
+    "gitCloneDepth": 1,
+    "buildspec": "hello-service/buildspec-unit.yml",
+    "auth": {
+      "type": "OAUTH"
+    },
+    "insecureSsl": false
+  },
+  "artifacts": {
+    "type": "NO_ARTIFACTS"
+  },
+  "cache": {
+    "type": "NO_CACHE"
+  },
+  "environment": {
+    "type": "LINUX_CONTAINER",
+    "image": "bigtruedata/sbt:latest",
+    "computeType": "BUILD_GENERAL1_SMALL",
+    "privilegedMode": true
+  },
+  "serviceRole": "${SERVICE_ROLE}",
+  "timeoutInMinutes": 60,
+  "tags": [],
+  "badgeEnabled": true
+}
