@@ -1,9 +1,9 @@
 FROM bigtruedata/sbt AS build
-WORKDIR /monorepo/time
+WORKDIR /monorepo
 COPY . .
 RUN sbt assembly
 
 FROM openjdk:8-alpine
-COPY --from=build /monorepo/time/target/scala-2.12/app.jar /app/app.jar
+COPY --from=build /monorepo/target/scala-2.12/app.jar /monorepo/app.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+ENTRYPOINT ["java", "-jar", "/monorepo/app.jar"]
